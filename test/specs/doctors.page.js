@@ -12,7 +12,7 @@ describe("Filter Schedule on the doctors page", () => {
     expect(url).to.equal("https://docdoc.ru/doctor");
   });
 
-  it("doctors and button are present", () => {
+  it("doctors and filter schedule button are present", () => {
     doctorsPage.doctorCardPath.waitForDisplayed({ timeout: 3000 });
 
     expect(doctorsPage.doctorCardsPath).to.have.lengthOf(10);
@@ -32,7 +32,7 @@ describe("Filter Schedule on the doctors page", () => {
     );
   });
 
-  it("filter doctors for tomorrow", () => {
+  it("filter doctors schedule for tomorrow", () => {
     doctorsPage.calendarButtonPath.waitForDisplayed({ timeout: 3000 });
     doctorsPage.calendarButtonPath.click();
     doctorsPage.oneDayAfterButtonPath.click();
