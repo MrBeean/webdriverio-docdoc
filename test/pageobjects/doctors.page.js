@@ -9,8 +9,8 @@ class DoctorsPage extends Page {
     return $('//*[@data-test-id="doctor-card-search-results"]');
   }
 
-  get doctorShedulePath() {
-    return $('//*[@class="clinic-slots__caption"]');
+  get doctorSheduleTextPath() {
+    return $(".clinic-slots__caption*=Онлайн-расписание на");
   }
 
   get calendarButtonPath() {
@@ -56,6 +56,20 @@ class DoctorsPage extends Page {
     }
 
     return cards;
+  }
+
+  checkDoctorsSheduleText() {
+    let currentDate = new Date();
+    let i = 0;
+
+    while (i < this.countVisibleCards()) {
+      expect(
+        this.doctorCardsPath[i]
+          .$('//*[@class="clinic-slots__caption"]')
+          .getText()
+      ).to.contain("Онлайн-расписание на " + (currentDate.getDate() + 1));
+      i++;
+    }
   }
 }
 

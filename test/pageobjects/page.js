@@ -1,4 +1,4 @@
-let config = require("../../config/main-config");
+const config = require("../../config/main-config");
 
 module.exports = class Page {
   open(path) {
@@ -7,5 +7,10 @@ module.exports = class Page {
     } else {
       browser.url(config.baseUrl);
     }
+  }
+
+  waitAndClick(element) {
+    element.waitForDisplayed({ timeout: config.elementTimeout });
+    element.click();
   }
 };

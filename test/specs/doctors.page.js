@@ -1,8 +1,7 @@
 const doctorsPage = require("../pageobjects/doctors.page");
+const config = require("../../config/main-config");
 
-describe("Filter Schedule on the doctors page", () => {
-  let currentDate = new Date();
-
+describe("Doctors page", () => {
   beforeEach(() => {
     doctorsPage.open();
   });
@@ -12,8 +11,10 @@ describe("Filter Schedule on the doctors page", () => {
     expect(url).to.equal("https://docdoc.ru/doctor");
   });
 
-  it("doctors and filter schedule button are present", () => {
-    doctorsPage.doctorCardPath.waitForDisplayed({ timeout: 3000 });
+  it("doctors cards and filter schedule button are present", () => {
+    doctorsPage.doctorCardPath.waitForDisplayed({
+      timeout: config.elementTimeout,
+    });
 
     expect(doctorsPage.doctorCardsPath).to.have.lengthOf(10);
     expect(doctorsPage.calendarButtonPath.getText()).to.equal(
@@ -22,8 +23,7 @@ describe("Filter Schedule on the doctors page", () => {
   });
 
   it("by default enabled all days filter", () => {
-    doctorsPage.calendarButtonPath.waitForDisplayed({ timeout: 3000 });
-    doctorsPage.calendarButtonPath.click();
+    doctorsPage.waitAndClick(doctorsPage.calendarButtonPath);
 
     expect(doctorsPage.calendarButtonsPath.isExisting()).to.equal(true);
     expect(doctorsPage.allDaysButtonPath.getText()).to.equal("Все дни");
@@ -33,28 +33,19 @@ describe("Filter Schedule on the doctors page", () => {
   });
 
   it("filter doctors schedule for tomorrow", () => {
-    doctorsPage.calendarButtonPath.waitForDisplayed({ timeout: 3000 });
-    doctorsPage.calendarButtonPath.click();
-    doctorsPage.oneDayAfterButtonPath.click();
+    doctorsPage.waitAndClick(doctorsPage.calendarButtonPath);
+    doctorsPage.waitAndClick(doctorsPage.oneDayAfterButtonPath);
 
-    doctorsPage.doctorShedulePath.waitForDisplayed({ timeout: 3000 });
-    doctorsPage.calendarButtonPath.click();
+    doctorsPage.doctorSheduleTextPath.waitForExist({
+      timeout: config.elementTimeout,
+    });
+    doctorsPage.waitAndClick(doctorsPage.calendarButtonPath);
+
     expect(doctorsPage.oneDayAfterButtonPath.getText()).to.contain("Завтра");
     expect(doctorsPage.oneDayAfterButtonPath.getAttribute("class")).to.contain(
       "--active"
     );
-
-    doctorsPage.doctorShedulePath.waitForDisplayed({ timeout: 3000 });
     expect(doctorsPage.doctorCardsPath).to.have.lengthOf(10);
-
-    let i = 0;
-    while (i < doctorsPage.countVisibleCards()) {
-      expect(
-        doctorsPage.doctorCardsPath[i]
-          .$('//*[@class="clinic-slots__caption"]')
-          .getText()
-      ).to.contain("Онлайн-расписание на " + (currentDate.getDate() + 1));
-      i++;
-    }
+    doctorsPage.checkDoctorsSheduleText();
   });
 });
