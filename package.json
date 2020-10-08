@@ -1,7 +1,7 @@
 {
   "name": "webdriverio-docdoc",
   "version": "1.0.0",
-  "description": "QA automation engineer test task for `docdoc`",
+  "description": "`docdoc` test task for QA automation engineer",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/wdio wdio.conf.js"

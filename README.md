@@ -1,5 +1,5 @@
 # README
-QA automation engineer test task for `docdoc`.
+`docdoc` test task for QA automation engineer.
 Tets run in headless mode, to chage it use config file `main-config.js`
 
 ## File structure
