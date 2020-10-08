@@ -1,13 +1,16 @@
 # README
+
 `docdoc` test task for QA automation engineer.
-Tets run in headless mode, to chage it use config file `main-config.js`
+Tests run in headless mode, to chage it use config file `main-config.js`
 
 ## File structure
+
 - `config` folder (main config file for wdio.conf.js, also can be used in specs)
 - `test` folder (contain specs and page objects files)
 - `prettierrc.json` use it with `Prettier - Code formatter`
 
 ## Use it
+
 - Download or clone project
 - Open it in console
         
@@ -15,7 +18,6 @@ Tets run in headless mode, to chage it use config file `main-config.js`
 - then
         
         npm test
-
 - to review the report
 
-        allure generate allure-results && allure open   
+        allure generate allure-results && allure open
