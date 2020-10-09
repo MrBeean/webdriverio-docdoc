@@ -1,13 +1,14 @@
 # README
 
-`docdoc` test task for QA automation engineer.
-Tests run in headless mode, to chage it use config file `main-config.js`
+`docdoc` test task (test framework: webdriverIO + mocha) for QA automation engineer.
+Tests run in headless mode, to chage it - use config file `main-config.js`
 
-## File structure
+        node -v #=> v12.18.3
+
+## Folder structure
 
 - `config` folder (main config file for wdio.conf.js, also can be used in specs)
 - `test` folder (contain specs and page objects files)
-- `prettierrc.json` use it with `Prettier - Code formatter`
 
 ## Use it
 
